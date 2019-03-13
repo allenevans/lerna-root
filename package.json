@@ -2,11 +2,18 @@
   "name": "lerna-root",
   "version": "1.0.0",
   "description": "Lerna run at root utility",
+  "bin": {
+    "lerna-root": "./src/index.js"
+  },
+  "files": [
+    "src/"
+  ],
   "main": "src/index.js",
   "scripts": {
     "lint": "npm run lint:js",
     "lint:fix": "npm run lint:js -- --fix",
     "lint:js": "eslint --ext .js ./src/",
+    "pack": "npm pack",
     "precommit": "lint-staged",
     "start": "node ./src/index",
     "test": "echo \"Error: no test specified\" && exit 1"
