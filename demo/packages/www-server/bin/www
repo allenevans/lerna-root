@@ -8,12 +8,15 @@ var app = require('../app');
 var debug = require('debug')('www-server:server');
 var http = require('http');
 
+
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+
+console.log('Starting server on port ', port);
 
 /**
  * Create HTTP server.
@@ -87,4 +90,10 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+
+  setInterval(() => {
+    console.log('Listening on ' + bind);
+  }, 1000);
+
+  setTimeout(() => process.exit(0), 10000);
 }

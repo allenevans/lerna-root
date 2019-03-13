@@ -3,17 +3,18 @@
   "version": "1.0.0",
   "description": "Lerna run at root utility",
   "bin": {
-    "lerna-root": "./src/index.js"
+    "lerna-root": "./bin/lerna-root.js"
   },
   "files": [
+    "bin/",
     "src/"
   ],
-  "main": "src/index.js",
+  "main": "bin/lerna-root.js",
   "scripts": {
     "lint": "npm run lint:js",
     "lint:fix": "npm run lint:js -- --fix",
     "lint:js": "eslint --ext .js ./src/",
-    "pack": "npm pack",
+    "pack": "rm *.tgz; npm pack",
     "precommit": "lint-staged",
     "start": "node ./src/index",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,5 +32,8 @@
     "eslint": "5.15.1",
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-plugin-import": "2.16.0"
+  },
+  "dependencies": {
+    "shelljs": "0.8.3"
   }
 }

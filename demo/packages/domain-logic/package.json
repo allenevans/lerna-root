@@ -1,0 +1,30 @@
+{
+  "name": "@acme/domain-logic",
+  "version": "1.0.0",
+  "description": "Package contains business domain logic",
+  "author": "Allen Evans",
+  "homepage": "https://github.com/allenevans/lerna-root#readme",
+  "license": "MIT",
+  "main": "dist/domain-logic.js",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allenevans/lerna-root.git"
+  },
+  "scripts": {
+    "build": "tsc src/index.ts",
+    "clean": "rimraf dist/",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/allenevans/lerna-root/issues"
+  },
+  "dependencies": {
+    "typescript": "3.3.3333"
+  },
+  "devDependencies": {
+    "rimraf": "2.6.3"
+  }
+}

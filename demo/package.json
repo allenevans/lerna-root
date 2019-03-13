@@ -1,15 +1,19 @@
 {
-  "name": "demo",
+  "name": "@acme/demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "start": "echo demo root...; lerna-root run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "lerna": "^3.13.1"
-  }
+    "lerna": "^3.13.1",
+    "lerna-root": "file:../lerna-root-1.0.0.tgz"
+  },
+  "dependencies": {}
 }
