@@ -9,14 +9,14 @@
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/allenevans/lerna-root.git"
-  },
   "scripts": {
     "build": "tsc src/index.ts",
     "clean": "rimraf dist/",
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allenevans/lerna-root.git"
   },
   "bugs": {
     "url": "https://github.com/allenevans/lerna-root/issues"

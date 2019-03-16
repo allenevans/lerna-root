@@ -9,19 +9,20 @@
   "files": [
     "dist"
   ],
+  "scripts": {
+    "build": "lerna-root run build -- tsc src/index.ts",
+    "clean": "rimraf dist/",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/allenevans/lerna-root.git"
-  },
-  "scripts": {
-    "build": "tsc src/index.ts",
-    "clean": "rimraf dist/",
-    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/allenevans/lerna-root/issues"
   },
   "dependencies": {
+    "lerna-root": "file:../../../lerna-root-1.0.0.tgz",
     "typescript": "3.3.3333"
   },
   "devDependencies": {

@@ -1,10 +1,10 @@
 {
   "name": "@acme/demo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Demo lerna monorepo",
   "main": "index.js",
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna-root bootstrap",
     "start": "echo demo root...; lerna-root run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

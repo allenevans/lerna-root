@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "bootstrap": "echo bootstrap...; lerna-root bootstrap",
     "start": "echo www-server...; lerna-root run start -- DEBUG=www-server:* PORT=3333 node ./bin/www",
     "start:wip": "echo www-server...; DEBUG=www-server:* PORT=3333 node ./bin/www"
   },

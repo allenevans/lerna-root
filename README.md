@@ -1,4 +1,3 @@
-lerna-root
-==========
+# lerna-root
 
-Tool for working with lerna monorepos.
+> Tool for running from anywhere lerna commands at the root of the monorepo.

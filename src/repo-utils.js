@@ -2,6 +2,7 @@ const fs = require('fs');
 const { join } = require('path');
 
 const LERNA_JSON = 'lerna.json';
+const PACKAGE_JSON = 'package.json';
 
 const traverseFind = (path, file) => {
   const exists = fs.existsSync(join(path, file));
@@ -19,6 +20,9 @@ const traverseFind = (path, file) => {
 
 const repoRoot = (path = process.cwd()) => traverseFind(path, LERNA_JSON);
 
+const nearestPackage = (path = process.cwd()) => traverseFind(path, PACKAGE_JSON);
+
 module.exports = {
+  nearestPackage,
   repoRoot,
 };
