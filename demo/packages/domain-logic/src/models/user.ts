@@ -1,5 +1,5 @@
 export class User {
-  username: string;
+  public username: string;
 
   constructor(username: string) {
     this.username = username;

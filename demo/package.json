@@ -1,10 +1,12 @@
 {
-  "name": "@acme/demo",
+  "name": "@example/demo",
   "version": "1.0.0",
   "description": "Demo lerna monorepo",
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna-root bootstrap",
+    "build": "lerna-root run build --scope=${PACKAGE_SCOPE} --include-filtered-dependencies",
+    "prebuild": "lerna-root run clean --scope=${PACKAGE_SCOPE} --include-filtered-dependencies",
     "start": "echo demo root...; lerna-root run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,8 +14,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
     "lerna": "^3.13.1",
-    "lerna-root": "file:../lerna-root-1.0.0.tgz"
+    "lerna-root": "file:../lerna-root-0.1.0.tgz"
   },
   "dependencies": {}
 }
