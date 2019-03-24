@@ -1,5 +1,5 @@
 {
-  "name": "@acme/domain-logic",
+  "name": "@example/domain-logic",
   "version": "1.0.0",
   "description": "Package contains business domain logic",
   "author": "Allen Evans",
@@ -10,8 +10,10 @@
     "dist"
   ],
   "scripts": {
-    "build": "lerna-root run build -- tsc src/index.ts",
-    "clean": "rimraf dist/",
+    "build": "lerna-root run build -- echo ⭐️ build @example/domain-logic; tsc",
+    "clean": "echo 🧹 Cleaning @example/domain-logic; rimraf dist/",
+    "lint": "lerna-root run lint -- tslint -c tslint.json --project tsconfig.json",
+    "lint:fix": "npm run lint -- --fix",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "repository": {
@@ -22,7 +24,12 @@
     "url": "https://github.com/allenevans/lerna-root/issues"
   },
   "dependencies": {
-    "lerna-root": "file:../../../lerna-root-1.0.0.tgz",
+    "@example/common-utils": "^1.0.0",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "lerna-root": "file:../../../lerna-root-0.1.0.tgz",
+    "tslint": "^5.14.0",
     "typescript": "3.3.3333"
   },
   "devDependencies": {

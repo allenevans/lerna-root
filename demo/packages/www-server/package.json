@@ -1,23 +1,27 @@
 {
-  "name": "@acme/www-server",
+  "name": "@example/www-server",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "bootstrap": "echo bootstrap...; lerna-root bootstrap",
+    "build": "lerna-root run build --include-filtered-dependencies -- echo ⭐️ build @example/www-server;",
     "start": "echo www-server...; lerna-root run start -- DEBUG=www-server:* PORT=3333 node ./bin/www",
     "start:wip": "echo www-server...; DEBUG=www-server:* PORT=3333 node ./bin/www"
   },
   "dependencies": {
-    "@acme/domain-logic": "^1.0.0",
+    "@example/domain-logic": "^1.0.0",
     "cookie-parser": "1.4.3",
     "debug": "2.6.9",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
     "express": "4.16.0",
     "hbs": "4.0.1",
     "http-errors": "1.6.2",
     "morgan": "1.9.0"
   },
   "devDependencies": {
-    "lerna-root": "file:../../../lerna-root-1.0.0.tgz",
+    "lerna-root": "file:../../../lerna-root-0.1.0.tgz",
     "rimraf": "2.6.3"
   }
 }

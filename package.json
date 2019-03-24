@@ -1,6 +1,6 @@
 {
   "name": "lerna-root",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Tool for running from anywhere lerna commands at the root of the monorepo",
   "bin": {
     "lerna-root": "./bin/lerna-root.js"
@@ -33,7 +33,5 @@
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-plugin-import": "2.16.0"
   },
-  "dependencies": {
-    "shelljs": "0.8.3"
-  }
+  "dependencies": {}
 }
