@@ -17,7 +17,7 @@
     "pack": "rm *.tgz; npm pack",
     "precommit": "lint-staged",
     "start": "node ./src/index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --collect-coverage"
   },
   "keywords": [],
   "author": "Allen Evans",
@@ -31,7 +31,8 @@
   "devDependencies": {
     "eslint": "5.15.1",
     "eslint-config-airbnb-base": "13.1.0",
-    "eslint-plugin-import": "2.16.0"
+    "eslint-plugin-import": "2.16.0",
+    "jest": "24.5.0"
   },
   "dependencies": {}
 }

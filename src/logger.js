@@ -1,40 +1,20 @@
-const LOGLEVEL = process.env.LOGLEVEL || 'info';
-const levels = ['trace', 'debug', 'info', 'warn', 'error'];
+const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
+const levels = ['trace', 'debug', 'info', 'warn', 'error', 'silent'];
 
-const error = (...args) => {
-  if (levels.indexOf('error') < levels.indexOf(LOGLEVEL)) { return; }
+const isEnabled = level => (levels.indexOf(level) >= levels.indexOf(LOG_LEVEL));
 
-  console.error(...args);
-};
+const noop = () => {};
 
-const warn = (...args) => {
-  if (levels.indexOf('warn') < levels.indexOf(LOGLEVEL)) { return; }
-
-  console.warn(...args);
-};
-
-const info = (...args) => {
-  if (levels.indexOf('info') < levels.indexOf(LOGLEVEL)) { return; }
-
-  console.log(...args);
-};
-
-const debug = (...args) => {
-  if (levels.indexOf('debug') < levels.indexOf(LOGLEVEL)) { return; }
-
-  console.log(...args);
-};
-
-const trace = (...args) => {
-  if (levels.indexOf('trace') < levels.indexOf(LOGLEVEL)) { return; }
-
-  console.log(...args);
-};
+const debug = (...args) => console.log(...args);
+const error = (...args) => console.error(...args);
+const info = (...args) => console.log(...args);
+const trace = (...args) => console.log(...args);
+const warn = (...args) => console.warn(...args);
 
 module.exports = {
-  debug,
-  error,
-  info,
-  trace,
-  warn,
+  debug: isEnabled('debug') ? debug : noop,
+  error: isEnabled('error') ? error : noop,
+  info: isEnabled('info') ? info : noop,
+  trace: isEnabled('trace') ? trace : noop,
+  warn: isEnabled('warn') ? warn : noop,
 };
