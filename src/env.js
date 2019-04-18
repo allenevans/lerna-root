@@ -1,0 +1,5 @@
+module.exports = {
+  ENTRY_POINT_WORKING_DIRECTORY: '__EWD__',
+  PACKAGE_SCOPE: 'PACKAGE_SCOPE',
+  ITERATION_COUNTER: '__ITC__',
+};

@@ -28,7 +28,7 @@
     "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "lerna-root": "file:../../../lerna-root-0.1.0.tgz",
+    "lerna-root": "file:../../../lerna-root-0.1.1.tgz",
     "tslint": "^5.14.0",
     "typescript": "3.3.3333"
   },
