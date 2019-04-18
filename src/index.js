@@ -1,106 +1,102 @@
 const { join } = require('path');
-const { spawnSync } = require('child_process');
-
+const { ENTRY_POINT_WORKING_DIRECTORY, PACKAGE_SCOPE, ITERATION_COUNTER } = require('./env');
+const { exec } = require('./exec');
 const {
-  debug,
-  error,
-  info,
-  trace,
-} = require('./logger');
-const { importJson, nearestPackage, repoRoot } = require('./repo-utils');
+  cwd,
+  importJson,
+  nearestPackage,
+  repoRoot,
+} = require('./repo-utils');
+const { debug, info } = require('./logger');
 
-const ENTRY_POINT_WORKING_DIRECTORY = '__EWD__';
-const WATCHDOG_COUNTER = '__WD__';
-const PACKAGE_SCOPE = 'PACKAGE_SCOPE';
-const WATCHDOG_TRIGGER = 5;
+const argsBuilder = ({
+  args,
+  isEntryPoint,
+  isRoot,
+}) => {
+  const doubleDashPosition = args.indexOf('--');
+  const hasDoubleDash = doubleDashPosition >= 0;
 
-const entryWorkingDirectory = process.env[ENTRY_POINT_WORKING_DIRECTORY] || process.cwd();
-const watchdog = Number(process.env[WATCHDOG_COUNTER]) || 0;
-
-if (watchdog > WATCHDOG_TRIGGER) {
-  error(`Recursive loop detected in ${process.cwd()}\n`);
-  process.exit(1);
-}
-
-debug(`⬅ ${process.argv.join(' ')}`);
-
-const exec = ({ command, cwd, scope }) => {
-  const { name: packageName } = importJson(join(nearestPackage(cwd), 'package.json'));
-  debug(`➤➤➤ ${packageName} ➤ ${command}`);
-
-  const env = Object.assign(
-    { FORCE_COLOR: true },
-    process.env,
-    {
-      [ENTRY_POINT_WORKING_DIRECTORY]: cwd,
-      [WATCHDOG_COUNTER]: watchdog + 1,
-    },
-    scope ? {
-      [PACKAGE_SCOPE]: scope,
-    } : {},
-  );
-
-  trace('env', JSON.stringify(env, null, 2));
-
-  const { status } = spawnSync(command, {
-    cwd,
-    shell: true,
-    stdio: 'inherit',
-    env,
-  });
-
-  if (status) {
-    error(`Exit code ${status}`);
-    process.exit(status);
+  if (hasDoubleDash) {
+    return isRoot || isEntryPoint ? args.slice(0, doubleDashPosition) : args.slice(doubleDashPosition + 1);
   }
+
+  return args;
 };
 
-const lernaRoot = ({ argv, cwd }) => {
-  const rootPath = repoRoot(cwd);
-  const { name: packageName } = importJson(join(nearestPackage(cwd), 'package.json'));
+const depth = +process.env[ITERATION_COUNTER] || 0;
+
+const lernaRoot = ({
+  argv,
+  currentWorkingDirectory = cwd(),
+  entryWorkingDirectory = process.env[ENTRY_POINT_WORKING_DIRECTORY] || cwd(),
+}) => {
+  debug('⬅ ', JSON.stringify({
+    argv,
+    currentWorkingDirectory,
+    entryWorkingDirectory,
+    env: {
+      ENTRY_POINT_WORKING_DIRECTORY: process.env[ENTRY_POINT_WORKING_DIRECTORY],
+      PACKAGE_SCOPE: process.env[PACKAGE_SCOPE],
+      ITERATION_COUNTER: process.env[ITERATION_COUNTER],
+    },
+  }, null, 2));
+
+  const rootPath = repoRoot(currentWorkingDirectory);
+  const { name: packageName } = importJson(nearestPackage(currentWorkingDirectory));
   const rootPkg = importJson(join(rootPath, 'package.json'));
 
   const lernaPath = join(rootPath, 'node_modules', '.bin', 'lerna');
   const npmPath = 'npm';
   const args = argv.slice(2);
 
-  const isRoot = () => cwd === repoRoot(cwd);
-  const calledInsidePackage = () => !isRoot() && cwd === entryWorkingDirectory;
+  const isEntryPoint = currentWorkingDirectory === entryWorkingDirectory && depth === 0;
+  const isRoot = () => currentWorkingDirectory === repoRoot(currentWorkingDirectory);
+  const calledInsidePackage = () => !isRoot() && isEntryPoint;
   const isRunAction = () => args[0] === 'run';
   const taskName = () => args[1];
   const hasNpmRootTask = name => !!rootPkg.scripts[name];
 
-  if (isRoot()) {
-    debug('isRoot === true');
-    const command = [lernaPath, ...args].join(' ');
+  const commandArgs = argsBuilder({
+    args,
+    isEntryPoint,
+    isRoot: isRoot(),
+  });
 
-    exec({
-      command,
-      cwd,
-    });
-  } else if (calledInsidePackage()) {
-    const useNpm = isRunAction() && hasNpmRootTask(taskName());
-    const runner = useNpm ? npmPath : `${lernaPath} exec --scope=${packageName}`;
-    debug(`calledInsidePackage: useNpm ${useNpm}`);
+  if (calledInsidePackage()) {
+    debug('calledInsidePackage');
+    if (isRunAction() && hasNpmRootTask(taskName())) {
+      const command = [npmPath, ...commandArgs].join(' ');
 
-    const command = useNpm ? [
-      runner,
-      ...args.slice(0, args.indexOf('--')),
-    ].join(' ') : [runner, `"${args.slice(args.indexOf('--') + 1).join(' ')}"`].join(' ')
+      info(`${packageName} ➤ ${command}`);
+      exec({
+        command,
+        currentWorkingDirectory: repoRoot(),
+        entryWorkingDirectory,
+        packageName,
+        scope: packageName,
+      });
+    } else {
+      const command = [lernaPath, ...commandArgs, `--scope=${packageName}`].join(' ');
 
-    info(`${packageName} ➤ ${command}`);
-    exec({
-      command,
-      cwd: rootPath,
-      scope: packageName,
-    });
+      info(`${packageName} ➤ ${command}`);
+      exec({
+        command,
+        currentWorkingDirectory: rootPath,
+        entryWorkingDirectory,
+        scope: packageName,
+        packageName,
+      });
+    }
   } else {
     debug('command executed in package from outside of package');
-    const command = args.slice(args.indexOf('--') + 1).join(' ');
+    const command = (args.indexOf('--') < 0 ? [lernaPath, ...commandArgs] : commandArgs).join(' ');
 
     exec({
       command,
-      cwd,
+      currentWorkingDirectory,
+      entryWorkingDirectory,
+      packageName,
     });
   }
 };

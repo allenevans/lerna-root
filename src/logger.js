@@ -1,4 +1,5 @@
-const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
+/* eslint-disable no-console */
+const LOG_LEVEL = (process.env.LOG_LEVEL || 'info').toLowerCase();
 const levels = ['trace', 'debug', 'info', 'warn', 'error', 'silent'];
 
 const isEnabled = level => (levels.indexOf(level) >= levels.indexOf(LOG_LEVEL));

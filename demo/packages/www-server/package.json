@@ -21,7 +21,7 @@
     "morgan": "1.9.0"
   },
   "devDependencies": {
-    "lerna-root": "file:../../../lerna-root-0.1.0.tgz",
+    "lerna-root": "file:../../../lerna-root-0.1.1.tgz",
     "rimraf": "2.6.3"
   }
 }

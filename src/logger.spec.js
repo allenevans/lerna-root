@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 describe('logger', () => {
   let globalConsole = console;
 
