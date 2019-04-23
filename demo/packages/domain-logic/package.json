@@ -24,15 +24,15 @@
     "url": "https://github.com/allenevans/lerna-root/issues"
   },
   "dependencies": {
-    "@example/common-utils": "^1.0.0",
+    "@example/common-utils": "^1.0.0"
+  },
+  "devDependencies": {
     "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "lerna-root": "file:../../../lerna-root-0.1.1.tgz",
+    "lerna-root": "file:../../../",
+    "rimraf": "2.6.3",
     "tslint": "^5.14.0",
     "typescript": "3.3.3333"
-  },
-  "devDependencies": {
-    "rimraf": "2.6.3"
   }
 }

@@ -12,16 +12,16 @@
     "@example/domain-logic": "^1.0.0",
     "cookie-parser": "^1.4.4",
     "debug": "^4.1.1",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.2",
     "express": "^4.16.4",
     "hbs": "^4.0.4",
     "http-errors": "^1.7.2",
     "morgan": "^1.9.1"
   },
   "devDependencies": {
-    "lerna-root": "file:../../../lerna-root-0.1.1.tgz",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "lerna-root": "file:../../../",
     "rimraf": "2.6.3"
   }
 }
