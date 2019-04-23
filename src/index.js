@@ -90,7 +90,7 @@ const lernaRoot = ({
     }
   } else {
     debug('command executed in package from outside of package');
-    const command = (args.indexOf('--') < 0 ? [lernaPath, ...commandArgs] : commandArgs).join(' ');
+    const command = (args.indexOf('--') < 0 || isEntryPoint ? [lernaPath, ...commandArgs] : commandArgs).join(' ');
 
     exec({
       command,

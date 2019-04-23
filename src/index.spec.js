@@ -101,6 +101,28 @@ describe('lerna-root', () => {
           packageName: demoRepoJson.name,
         });
       });
+
+      it('should use `lerna run` when executing from the entry point', () => {
+        lernaRoot({
+          argv: [
+            '/node',
+            '/node_modules/.bin/lerna-root',
+            'run',
+            'lint',
+            '--',
+            '--fix',
+          ],
+          currentWorkingDirectory: DEMO_ROOT,
+          entryWorkingDirectory: DEMO_ROOT,
+        });
+
+        expect(exec).toHaveBeenCalledWith({
+          command: `${DEMO_ROOT}/node_modules/.bin/lerna run lint`,
+          currentWorkingDirectory: DEMO_ROOT,
+          entryWorkingDirectory: DEMO_ROOT,
+          packageName: demoRepoJson.name,
+        });
+      });
     });
 
     describe('lerna-root exec', () => {
@@ -219,8 +241,6 @@ describe('lerna-root', () => {
   });
 
   describe('repo root from package', () => {
-    const currentWorkingDirectory = DEMO_PACKAGE;
-
     beforeEach(() => {
       repoRoot.mockReturnValue(DEMO_ROOT);
       importJson.mockReturnValue(demoPackageJson);
