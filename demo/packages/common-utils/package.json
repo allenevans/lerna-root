@@ -13,7 +13,7 @@
     "build": "lerna-root run build -- echo ⭐️ build @example/common-utils",
     "clean": "echo 🧹 Cleaning @example/common-utils; rimraf dist/",
     "lint": "lerna-root run lint -- tslint -c tslint.json --project tsconfig.json",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo No tests defined"
   },
   "repository": {
     "type": "git",

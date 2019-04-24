@@ -14,7 +14,7 @@
     "clean": "echo 🧹 Cleaning @example/domain-logic; rimraf dist/",
     "lint": "lerna-root run lint -- tslint -c tslint.json --project tsconfig.json",
     "lint:fix": "npm run lint -- --fix",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo No tests defined"
   },
   "repository": {
     "type": "git",

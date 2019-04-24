@@ -1,5 +1,7 @@
 const { spawnSync } = require('child_process');
-const { ENTRY_POINT_WORKING_DIRECTORY, PACKAGE_SCOPE, ITERATION_COUNTER } = require('./env');
+const {
+  PASSED_ARGS, ENTRY_POINT_WORKING_DIRECTORY, PACKAGE_SCOPE, ITERATION_COUNTER,
+} = require('./env');
 
 const {
   debug,
@@ -11,6 +13,7 @@ const watchdog = Number(process.env[ITERATION_COUNTER]) || 0;
 const exec = ({
   command,
   currentWorkingDirectory,
+  passedArgs,
   entryWorkingDirectory,
   packageName,
   scope,
@@ -27,11 +30,20 @@ const exec = ({
     scope ? {
       [PACKAGE_SCOPE]: scope,
     } : {},
+    passedArgs ? {
+      [PASSED_ARGS]: JSON.stringify(passedArgs),
+    } : {},
   );
 
   debug('↳', {
     command,
     currentWorkingDirectory,
+    env: {
+      [PASSED_ARGS]: env[PASSED_ARGS],
+      [ENTRY_POINT_WORKING_DIRECTORY]: env[ENTRY_POINT_WORKING_DIRECTORY],
+      [ITERATION_COUNTER]: env[ITERATION_COUNTER],
+      [PACKAGE_SCOPE]: env[PACKAGE_SCOPE],
+    },
   });
 
   const { status } = spawnSync(command, {

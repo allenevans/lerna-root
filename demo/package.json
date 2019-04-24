@@ -6,11 +6,11 @@
   "scripts": {
     "bootstrap": "lerna-root bootstrap",
     "build": "lerna-root run build --scope=${PACKAGE_SCOPE} --include-filtered-dependencies --stream",
-    "lint": "lerna-root run lint --scope=${PACKAGE_SCOPE} --stream",
-    "lint:fix": "lerna-root run lint -- --fix",
+    "lint": "lerna-root run lint --scope=${PACKAGE_SCOPE}",
+    "lint:fix": "npm run lint -- --fix",
     "prebuild": "lerna-root run clean --scope=${PACKAGE_SCOPE} --include-filtered-dependencies",
     "start": "echo demo root...; lerna-root run start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "lerna-root run test --scope=${PACKAGE_SCOPE} --include-filtered-dependents"
   },
   "keywords": [],
   "author": "",

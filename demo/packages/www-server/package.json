@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "bootstrap": "echo bootstrap...; lerna-root bootstrap",
-    "build": "lerna-root run build --include-filtered-dependencies -- echo ⭐️ build @example/www-server;",
+    "build": "lerna-root run build --include-filtered-dependencies -- echo ⭐ build @example/www-server;",
+    "lint": "lerna-root run lint -- eslint --config ../../.eslintrc.json --ext .js ./",
     "start": "echo www-server...; lerna-root run start -- DEBUG=www-server:* PORT=3333 node ./bin/www",
     "start:wip": "echo www-server...; DEBUG=www-server:* PORT=3333 node ./bin/www"
   },
