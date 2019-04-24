@@ -1,1 +1,1 @@
-export { uppercaseFirst } from './string-utils/uppercase-first'
+export {uppercaseFirst} from './string-utils/uppercase-first';

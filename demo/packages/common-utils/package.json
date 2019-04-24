@@ -13,7 +13,7 @@
     "build": "lerna-root run build -- echo ⭐️ build @example/common-utils",
     "clean": "echo 🧹 Cleaning @example/common-utils; rimraf dist/",
     "lint": "lerna-root run lint -- tslint -c tslint.json --project tsconfig.json",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo No tests defined"
   },
   "repository": {
     "type": "git",
@@ -23,14 +23,14 @@
     "url": "https://github.com/allenevans/lerna-root/issues"
   },
   "dependencies": {
+  },
+  "devDependencies": {
     "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "lerna-root": "file:../../../lerna-root-0.1.1.tgz",
-    "typescript": "3.3.3333"
-  },
-  "devDependencies": {
+    "lerna-root": "file:../../../",
     "rimraf": "2.6.3",
-    "tslint": "^5.14.0"
+    "tslint": "^5.14.0",
+    "typescript": "3.3.3333"
   }
 }
