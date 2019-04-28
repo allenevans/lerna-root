@@ -1,6 +1,6 @@
 {
   "name": "lerna-root",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Tool for running from anywhere lerna commands at the root of the monorepo",
   "bin": {
     "lerna-root": "./bin/lerna-root.js"
