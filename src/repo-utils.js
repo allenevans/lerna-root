@@ -22,7 +22,7 @@ const repoRoot = (path = process.cwd()) => traverseFind(path, LERNA_JSON);
 
 const nearestPackage = (path = process.cwd()) => join(traverseFind(path, PACKAGE_JSON), PACKAGE_JSON);
 
-const importJson = filePath => readFileSync(filePath).toJSON();
+const importJson = filePath => JSON.parse(readFileSync(filePath).toString());
 
 const cwd = () => process.cwd();
 
