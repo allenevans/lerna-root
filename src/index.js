@@ -14,7 +14,7 @@ const { debug, info } = require('./logger');
 
 const npmPassedArgs = () => {
   try {
-    return JSON.parse(process.env.npm_config_argv).remain || [];
+    return JSON.parse(process.env.npm_config_argv).remain;
   } catch (x) {
     return [];
   }
@@ -23,9 +23,8 @@ const npmPassedArgs = () => {
 const passedArgs = () => {
   let args = [];
   try {
-    args = JSON.parse(process.env[PASSED_ARGS]) || [];
-  } catch (x) { /* ignore error */
-  }
+    args = JSON.parse(process.env[PASSED_ARGS]);
+  } catch (x) { /* ignore error */ }
 
   return args.length ? args : npmPassedArgs();
 };

@@ -1,6 +1,9 @@
 const { spawnSync } = require('child_process');
 const {
-  PASSED_ARGS, ENTRY_POINT_WORKING_DIRECTORY, PACKAGE_SCOPE, ITERATION_COUNTER,
+  ENTRY_POINT_WORKING_DIRECTORY,
+  ITERATION_COUNTER,
+  PACKAGE_SCOPE,
+  PASSED_ARGS,
 } = require('./env');
 
 const {
@@ -8,7 +11,6 @@ const {
   error,
 } = require('./logger');
 
-const watchdog = Number(process.env[ITERATION_COUNTER]) || 0;
 
 const exec = ({
   command,
@@ -19,6 +21,7 @@ const exec = ({
   scope,
 }) => {
   debug(`➤➤➤ ${packageName} ➤ ${command}`);
+  const watchdog = Number(process.env[ITERATION_COUNTER]) || 0;
 
   const env = Object.assign(
     { FORCE_COLOR: true },

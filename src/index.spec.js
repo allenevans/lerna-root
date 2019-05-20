@@ -2,7 +2,7 @@
 const { join } = require('path');
 const { lernaRoot } = require('.');
 const { exec } = require('./exec');
-const { importJson, repoRoot } = require('./repo-utils');
+const { cwd, importJson, repoRoot } = require('./repo-utils');
 const envVars = require('./env');
 
 const DEMO_ROOT = join(__dirname, '..', 'demo');
@@ -26,26 +26,32 @@ describe('lerna-root', () => {
       repoRoot.mockReturnValue(DEMO_ROOT);
       importJson.mockReturnValue(demoRepoJson);
 
-      exec.mockImplementation = () => {
-      };
+      exec.mockImplementation = () => {};
+      cwd.mockReturnValue(currentWorkingDirectory);
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
     });
 
     describe('lerna-root bootstrap', () => {
+      beforeEach(() => {
+      });
+
       it('should run lerna bootstrap', () => {
         const argv = ['/node',
           '/node_modules/.bin/lerna-root',
           'bootstrap'];
 
-        lernaRoot({
-          argv,
-          currentWorkingDirectory,
-        });
+        // cwd.mockReturnValue(currentWorkingDirectory);
+
+        lernaRoot({ argv });
 
         expect(exec).toHaveBeenCalledWith({
           command: `${currentWorkingDirectory}/node_modules/.bin/lerna bootstrap`,
           currentWorkingDirectory,
           passedArgs: [],
-          entryWorkingDirectory: undefined,
+          entryWorkingDirectory: currentWorkingDirectory,
           packageName: demoRepoJson.name,
         });
       });
@@ -67,7 +73,7 @@ describe('lerna-root', () => {
           command: `${DEMO_ROOT}/node_modules/.bin/lerna run build`,
           currentWorkingDirectory,
           passedArgs: [],
-          entryWorkingDirectory: undefined,
+          entryWorkingDirectory: currentWorkingDirectory,
           packageName: demoRepoJson.name,
         });
       });
@@ -87,7 +93,7 @@ describe('lerna-root', () => {
           command: `${currentWorkingDirectory}/node_modules/.bin/lerna run some-task`,
           currentWorkingDirectory,
           passedArgs: [],
-          entryWorkingDirectory: undefined,
+          entryWorkingDirectory: currentWorkingDirectory,
           packageName: demoRepoJson.name,
         });
       });
@@ -157,7 +163,7 @@ describe('lerna-root', () => {
           command: `${currentWorkingDirectory}/node_modules/.bin/lerna exec npm install`,
           currentWorkingDirectory,
           passedArgs: [],
-          entryWorkingDirectory: undefined,
+          entryWorkingDirectory: currentWorkingDirectory,
           packageName: demoRepoJson.name,
         });
       });
