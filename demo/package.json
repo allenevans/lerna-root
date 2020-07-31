@@ -16,10 +16,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.2",
-    "lerna": "^3.13.3",
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "lerna": "^3.22.1",
     "lerna-root": "file:../"
   },
   "dependencies": {}
